@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lensworks Photography — Portrait & Event photography. Book your session today.">
+  <title>Lensworks Photography</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- GLightbox -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo">Lensworks</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#booking" class="nav__link nav__link--cta">Book a Session</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__bg" style="background-image: url('images/events/img_6116.jpg')"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__sub fade-up">Photography</p>
+      <h1 class="hero__title fade-up">Lensworks</h1>
+      <p class="hero__tagline fade-up">Capturing moments that last a lifetime.</p>
+      <div class="hero__ctas fade-up">
+        <a href="#portfolio" class="btn btn--primary">View Work</a>
+        <a href="#booking" class="btn btn--outline">Book a Session</a>
+      </div>
+    </div>
+    <a href="#portfolio" class="hero__scroll" aria-label="Scroll down">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="section portfolio" id="portfolio">
+    <div class="container">
+      <div class="section__header fade-up">
+        <h2 class="section__title">Portfolio</h2>
+        <p class="section__sub">Select a category to explore</p>
+      </div>
+
+      <div class="tabs fade-up">
+        <button class="tab-btn active" data-tab="portraits">Portrait</button>
+        <button class="tab-btn" data-tab="events">Events</button>
+      </div>
+
+      <!-- Portraits Gallery -->
+      <div class="gallery-grid" data-grid="portraits">
+        <a href="images/portraits/bdaypics-99.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/bdaypics-99.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+        <a href="images/portraits/bdaypics-102.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/bdaypics-102.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+        <a href="images/portraits/bdaypics-104.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/bdaypics-104.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+        <a href="images/portraits/sphotoshoot-3.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/sphotoshoot-3.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+        <a href="images/portraits/sphotoshoot-6.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/sphotoshoot-6.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+        <a href="images/portraits/sphotoshoot-9.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/sphotoshoot-9.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+        <a href="images/portraits/sphotoshoot-12.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/sphotoshoot-12.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+        <a href="images/portraits/sphotoshoot-14.jpg" class="glightbox gallery-item" data-gallery="portraits" data-title="Portrait Session">
+          <img src="images/portraits/sphotoshoot-14.jpg" alt="Portrait photography" loading="lazy">
+        </a>
+      </div>
+
+      <!-- Events Gallery -->
+      <div class="gallery-grid" data-grid="events" hidden>
+        <a href="images/events/img_6116.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_6116.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_6470-1.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_6470-1.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/bdaypics-21.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Birthday Celebration">
+          <img src="images/events/bdaypics-21.jpg" alt="Birthday event photography" loading="lazy">
+        </a>
+        <a href="images/events/bdaypics-22.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Birthday Celebration">
+          <img src="images/events/bdaypics-22.jpg" alt="Birthday event photography" loading="lazy">
+        </a>
+        <a href="images/events/bdaypics-27.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Birthday Celebration">
+          <img src="images/events/bdaypics-27.jpg" alt="Birthday event photography" loading="lazy">
+        </a>
+        <a href="images/events/bdaypics-30.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Birthday Celebration">
+          <img src="images/events/bdaypics-30.jpg" alt="Birthday event photography" loading="lazy">
+        </a>
+        <a href="images/events/bdaypics-38.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Birthday Celebration">
+          <img src="images/events/bdaypics-38.jpg" alt="Birthday event photography" loading="lazy">
+        </a>
+        <a href="images/events/bdaypics-40.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Birthday Celebration">
+          <img src="images/events/bdaypics-40.jpg" alt="Birthday event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5250.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5250.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5263.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5263.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5278.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5278.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5284-1.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5284-1.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5347.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5347.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5609-1.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5609-1.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5640.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5640.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5655.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5655.jpg" alt="Event photography" loading="lazy">
+        </a>
+        <a href="images/events/img_5659.jpg" class="glightbox gallery-item" data-gallery="events" data-title="Event Photography">
+          <img src="images/events/img_5659.jpg" alt="Event photography" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="container about__inner">
+      <div class="about__image fade-up">
+        <img src="images/portraits/sphotoshoot-14.jpg" alt="Lensworks Photography">
+      </div>
+      <div class="about__text fade-up">
+        <h2 class="section__title">The Lens Behind the Work</h2>
+        <p>Every frame tells a story. At Lensworks, we believe that the best photographs aren't posed — they're felt. Whether it's the laughter at a birthday celebration or the quiet confidence of a portrait session, we're there to preserve it.</p>
+        <p>Based in the DFW area, we specialize in portrait sessions and events of all sizes. Let's create something worth remembering.</p>
+        <a href="#booking" class="btn btn--primary" style="margin-top:2rem; display:inline-block;">Work With Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="section booking" id="booking">
+    <div class="container">
+      <div class="section__header fade-up">
+        <h2 class="section__title">Book a Session</h2>
+        <p class="section__sub">Ready to create something? Reach out below.</p>
+      </div>
+
+      <div class="booking-grid fade-up">
+
+        <!-- Instagram DM -->
+        <div class="booking-card">
+          <div class="booking-card__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3 class="booking-card__title">Message on Instagram</h3>
+          <p class="booking-card__desc">The fastest way to connect. Send a DM and we'll get back to you quickly.</p>
+          <a href="https://ig.me/m/lensworks.photo" target="_blank" rel="noopener noreferrer" class="btn btn--instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            DM @lensworks.photo
+          </a>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="booking-card">
+          <div class="booking-card__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <h3 class="booking-card__title">Send an Inquiry</h3>
+          <p class="booking-card__desc">Fill out the form below and we'll be in touch within 24 hours.</p>
+          <form id="contact-form" action="https://formspree.io/f/mkoygvpg" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New booking inquiry — Lensworks Photography">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="type">Session Type</label>
+              <select id="type" name="session_type">
+                <option value="">Select a session type...</option>
+                <option value="Portrait Session">Portrait Session</option>
+                <option value="Birthday / Celebration">Birthday / Celebration</option>
+                <option value="Event Coverage">Event Coverage</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell me about your vision, dates, location..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#hero" class="footer__logo">Lensworks</a>
+      <div class="footer__socials">
+        <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          @lensworks.photo
+        </a>
+        <a href="mailto:akshay.gadey.35@gmail.com" class="footer__social-link" aria-label="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          akshay.gadey.35@gmail.com
+        </a>
+      </div>
+      <p class="footer__copy">&copy; 2025 Lensworks Photography. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- GLightbox JS -->
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

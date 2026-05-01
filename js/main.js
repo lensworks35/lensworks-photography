@@ -8,12 +8,6 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('nav--scrolled', window.scrollY > 60);
 }, { passive: true });
 
-// --- Hero subtle parallax on load ---
-const hero = document.querySelector('.hero');
-if (hero) {
-  hero.classList.add('loaded');
-}
-
 // --- Mobile hamburger menu ---
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('nav-links');

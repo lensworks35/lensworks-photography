@@ -41,7 +41,9 @@ tabBtns.forEach(btn => {
     btn.classList.add('active');
 
     grids.forEach(grid => {
-      grid.hidden = grid.dataset.grid !== target;
+      const show = grid.dataset.grid === target;
+      grid.hidden = !show;
+      if (show) staggerGrid(grid);
     });
   });
 });
@@ -59,7 +61,6 @@ const lightbox = GLightbox({
 });
 
 // --- Intersection Observer for scroll animations ---
-// (Skip hero elements — they use CSS keyframe animations)
 const scrollObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -69,12 +70,34 @@ const scrollObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.fade-up').forEach(el => {
-  // Hero fade-ups use keyframe animation, skip them for observer
-  if (!el.closest('.hero')) {
-    scrollObserver.observe(el);
-  }
+// fade-up & fade-left/right (skip hero — uses keyframe animation)
+document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => {
+  if (!el.closest('.hero')) scrollObserver.observe(el);
 });
+
+// --- Gallery stagger animation ---
+function staggerGrid(grid) {
+  const items = grid.querySelectorAll('.gallery-item');
+  items.forEach((item, i) => {
+    item.classList.remove('visible');
+    item.style.setProperty('--stagger', `${i * 0.055}s`);
+  });
+  // Small rAF so removing .visible has time to reset before re-adding
+  requestAnimationFrame(() => {
+    items.forEach(item => item.classList.add('visible'));
+  });
+}
+
+const galleryObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      staggerGrid(entry.target);
+      galleryObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.gallery-grid').forEach(g => galleryObserver.observe(g));
 
 // --- Formspree AJAX form submission ---
 const form = document.getElementById('contact-form');

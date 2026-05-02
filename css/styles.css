@@ -621,6 +621,59 @@ ul {
   transition: none;
 }
 
+/* Slide in from sides — booking cards */
+.fade-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-left.visible  { opacity: 1; transform: translateX(0); }
+.fade-right.visible { opacity: 1; transform: translateX(0); transition-delay: 0.12s; }
+
+/* Gold underline reveal on section titles */
+.section__title {
+  position: relative;
+  display: inline-block;
+}
+.section__title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width 0.7s ease 0.35s;
+}
+.section__header.visible .section__title::after,
+.about__text.visible    .section__title::after {
+  width: 48px;
+}
+/* Left-aligned title in about section */
+.about__text .section__title::after {
+  left: 0;
+  transform: none;
+}
+
+/* Gallery items stagger in */
+.gallery-item {
+  opacity: 0;
+  transform: translateY(18px);
+}
+@keyframes itemReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+.gallery-item.visible {
+  animation: itemReveal 0.5s ease forwards;
+  animation-delay: var(--stagger, 0s);
+}
+
 /* =============================================
    RESPONSIVE
    ============================================= */

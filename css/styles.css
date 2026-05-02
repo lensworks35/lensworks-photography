@@ -388,12 +388,6 @@ ul {
 /* =============================================
    PORTFOLIO MODAL
    ============================================= */
-body.scroll-locked {
-  overflow: hidden;
-  position: fixed;
-  left: 0;
-  right: 0;
-}
 
 .pf-modal {
   position: fixed;

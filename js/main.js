@@ -96,10 +96,7 @@ function staggerGrid(grid) {
 
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-
-    const scrollY = window.scrollY;
-    document.body.style.top = `-${scrollY}px`;
-    document.body.classList.add('scroll-locked');
+    document.body.style.overflow = 'hidden';
 
     setTimeout(() => {
       panel.focus();
@@ -110,11 +107,7 @@ function staggerGrid(grid) {
   function closeModal() {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-
-    const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10));
-    document.body.classList.remove('scroll-locked');
-    document.body.style.top = '';
-    window.scrollTo(0, scrollY);
+    document.body.style.overflow = '';
 
     if (lastFocused) { lastFocused.focus(); lastFocused = null; }
   }

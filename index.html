@@ -36,15 +36,55 @@
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero__design">
-      <div class="hero__ring hero__ring--1"></div>
-      <div class="hero__ring hero__ring--2"></div>
-      <div class="hero__ring hero__ring--3"></div>
-      <div class="hero__ring hero__ring--4"></div>
-      <div class="hero__ring hero__ring--5"></div>
-      <div class="hero__ring hero__ring--6"></div>
-      <div class="hero__cross-lines"></div>
-      <div class="hero__glow"></div>
-      <div class="hero__grain"></div>
+      <svg class="hero__svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0.18"/>
+            <stop offset="40%"  stop-color="#c9a84c" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="centerDot" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Background -->
+        <rect width="1440" height="900" fill="#0d0d0d"/>
+
+        <!-- Ambient glow -->
+        <ellipse cx="720" cy="450" rx="500" ry="380" fill="url(#bgGlow)"/>
+
+        <!-- Concentric rings -->
+        <circle cx="720" cy="450" r="60"  fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.9"/>
+        <circle cx="720" cy="450" r="140" fill="none" stroke="#c9a84c" stroke-width="1"   stroke-opacity="0.5" stroke-dasharray="8 6">
+          <animateTransform attributeName="transform" type="rotate" from="0 720 450" to="360 720 450" dur="22s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="720" cy="450" r="240" fill="none" stroke="#c9a84c" stroke-width="1"   stroke-opacity="0.3"/>
+        <circle cx="720" cy="450" r="360" fill="none" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.18" stroke-dasharray="12 8">
+          <animateTransform attributeName="transform" type="rotate" from="0 720 450" to="-360 720 450" dur="36s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="720" cy="450" r="500" fill="none" stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.10"/>
+        <circle cx="720" cy="450" r="660" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.06"/>
+
+        <!-- Crosshair lines -->
+        <line x1="720" y1="0"   x2="720" y2="900" stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.18"/>
+        <line x1="0"   y1="450" x2="1440" y2="450" stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.18"/>
+        <line x1="0"   y1="0"   x2="1440" y2="900" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.09"/>
+        <line x1="1440" y1="0"  x2="0"    y2="900" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.09"/>
+
+        <!-- Tick marks on h/v lines -->
+        <line x1="720" y1="386" x2="720" y2="396" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
+        <line x1="720" y1="504" x2="720" y2="514" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
+        <line x1="656" y1="450" x2="666" y2="450" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
+        <line x1="774" y1="450" x2="784" y2="450" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
+
+        <!-- Center dot glow -->
+        <circle cx="720" cy="450" r="50" fill="url(#centerDot)" opacity="0.6">
+          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="720" cy="450" r="5" fill="#c9a84c" opacity="0.9"/>
+      </svg>
     </div>
     <div class="hero__content">
       <p class="hero__sub fade-up">Photography</p>
@@ -61,36 +101,6 @@
       </svg>
     </a>
   </section>
-
-  <!-- MARQUEE STRIP -->
-  <div class="marquee-strip" aria-hidden="true">
-    <div class="marquee-track">
-      <span class="marquee-content">
-        <span>PORTRAIT</span><span class="marquee-dot">✦</span>
-        <span>EVENTS</span><span class="marquee-dot">✦</span>
-        <span>LENSWORKS</span><span class="marquee-dot">✦</span>
-        <span>DFW PHOTOGRAPHY</span><span class="marquee-dot">✦</span>
-        <span>CAPTURING MOMENTS</span><span class="marquee-dot">✦</span>
-        <span>PORTRAIT</span><span class="marquee-dot">✦</span>
-        <span>EVENTS</span><span class="marquee-dot">✦</span>
-        <span>LENSWORKS</span><span class="marquee-dot">✦</span>
-        <span>DFW PHOTOGRAPHY</span><span class="marquee-dot">✦</span>
-        <span>CAPTURING MOMENTS</span><span class="marquee-dot">✦</span>
-      </span>
-      <span class="marquee-content" aria-hidden="true">
-        <span>PORTRAIT</span><span class="marquee-dot">✦</span>
-        <span>EVENTS</span><span class="marquee-dot">✦</span>
-        <span>LENSWORKS</span><span class="marquee-dot">✦</span>
-        <span>DFW PHOTOGRAPHY</span><span class="marquee-dot">✦</span>
-        <span>CAPTURING MOMENTS</span><span class="marquee-dot">✦</span>
-        <span>PORTRAIT</span><span class="marquee-dot">✦</span>
-        <span>EVENTS</span><span class="marquee-dot">✦</span>
-        <span>LENSWORKS</span><span class="marquee-dot">✦</span>
-        <span>DFW PHOTOGRAPHY</span><span class="marquee-dot">✦</span>
-        <span>CAPTURING MOMENTS</span><span class="marquee-dot">✦</span>
-      </span>
-    </div>
-  </div>
 
   <!-- PORTFOLIO -->
   <section class="section portfolio" id="portfolio">

@@ -29,25 +29,6 @@ navLinks.querySelectorAll('.nav__link').forEach(link => {
   });
 });
 
-// --- Portfolio tab switching ---
-const tabBtns = document.querySelectorAll('.tab-btn');
-const grids   = document.querySelectorAll('.gallery-grid');
-
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = btn.dataset.tab;
-
-    tabBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    grids.forEach(grid => {
-      const show = grid.dataset.grid === target;
-      grid.hidden = !show;
-      if (show) staggerGrid(grid);
-    });
-  });
-});
-
 // --- GLightbox initialization ---
 const lightbox = GLightbox({
   touchNavigation: true,
@@ -88,16 +69,78 @@ function staggerGrid(grid) {
   });
 }
 
-const galleryObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      staggerGrid(entry.target);
-      galleryObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.05 });
+// --- Portfolio modal ---
+(function () {
+  const modal     = document.getElementById('portfolio-modal');
+  const backdrop  = document.getElementById('pf-modal-backdrop');
+  const panel     = document.getElementById('pf-modal-panel');
+  const titleEl   = document.getElementById('pf-modal-title');
+  const closeBtn  = document.getElementById('pf-modal-close');
+  const modalBody = document.getElementById('pf-modal-body');
+  const grids     = modalBody.querySelectorAll('.gallery-grid');
 
-document.querySelectorAll('.gallery-grid').forEach(g => galleryObserver.observe(g));
+  let lastFocused = null;
+
+  function openModal(category) {
+    lastFocused = document.activeElement;
+
+    grids.forEach(grid => {
+      const show = grid.dataset.grid === category;
+      grid.hidden = !show;
+      if (show) {
+        titleEl.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+        modalBody.scrollTop = 0;
+        staggerGrid(grid);
+      }
+    });
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+
+    const scrollY = window.scrollY;
+    document.body.style.top = `-${scrollY}px`;
+    document.body.classList.add('scroll-locked');
+
+    setTimeout(() => {
+      panel.focus();
+      lightbox.reload();
+    }, 420);
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+
+    const scrollY = Math.abs(parseInt(document.body.style.top || '0', 10));
+    document.body.classList.remove('scroll-locked');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollY);
+
+    if (lastFocused) { lastFocused.focus(); lastFocused = null; }
+  }
+
+  function trapFocus(e) {
+    if (!modal.classList.contains('is-open')) return;
+    const focusable = panel.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+
+  document.querySelectorAll('.portfolio-card').forEach(card => {
+    card.addEventListener('click', () => openModal(card.dataset.category));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+  panel.addEventListener('keydown', trapFocus);
+})();
 
 // --- Formspree AJAX form submission ---
 const form = document.getElementById('contact-form');

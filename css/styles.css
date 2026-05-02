@@ -353,67 +353,31 @@ ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 .portfolio-card {
-  position: relative;
-  display: block;
-  width: 100%;
-  border: none;
-  padding: 0;
-  background: none;
-  cursor: pointer;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-}
-
-.portfolio-card__cover {
-  width: 100%;
-  height: 100%;
-}
-
-.portfolio-card__cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s ease, filter 0.6s ease;
-}
-
-.portfolio-card:hover .portfolio-card__cover img,
-.portfolio-card:focus-visible .portfolio-card__cover img {
-  transform: scale(1.05);
-  filter: brightness(0.65);
-}
-
-.portfolio-card__overlay {
-  position: absolute;
-  inset: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 1.75rem;
-  background: linear-gradient(to top, rgba(13,13,13,0.80) 0%, rgba(13,13,13,0.25) 50%, transparent 100%);
-  pointer-events: none;
-}
-
-.portfolio-card__label {
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
   font-family: var(--font-head);
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-size: 1.5rem;
   font-weight: 400;
   color: var(--text);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
 }
 
-.portfolio-card__count {
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.portfolio-card:hover {
+  border-color: var(--accent);
   color: var(--accent);
-  margin-top: 0.35rem;
+  background: var(--accent-glow);
 }
 
 .portfolio-card:focus-visible {
@@ -936,9 +900,6 @@ body.scroll-locked {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  .portfolio-card {
-    aspect-ratio: 16 / 9;
-  }
   .pf-modal {
     align-items: stretch;
   }
@@ -953,12 +914,6 @@ body.scroll-locked {
   }
   .pf-modal__body {
     padding: 1rem 1.25rem 1.5rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .portfolio-card__overlay {
-    padding: 1.25rem;
   }
 }
 

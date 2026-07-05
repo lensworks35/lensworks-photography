@@ -6,22 +6,28 @@
   <meta name="description" content="Lensworks Photography — Professional portrait and event photographer serving Frisco, Plano, Allen, McKinney, and all of DFW. Book your session today.">
   <title>Frisco &amp; DFW Portrait + Event Photographer | Lensworks Photography</title>
 
+  <script>document.documentElement.classList.add('js');</script>
+
   <!-- Canonical -->
   <link rel="canonical" href="https://lensworksphoto.com/" />
+
+  <!-- Favicon / theme -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="theme-color" content="#17120F">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lensworksphoto.com/" />
   <meta property="og:title" content="Frisco & DFW Portrait + Event Photographer | Lensworks Photography" />
   <meta property="og:description" content="Professional portrait and event photographer serving Frisco, Plano, Allen, McKinney, and all of DFW. Book your session today." />
-  <meta property="og:image" content="https://lensworksphoto.com/images/IMG_0486.png" />
+  <meta property="og:image" content="https://lensworksphoto.com/images/hero.jpg" />
   <meta property="og:site_name" content="Lensworks Photography" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Frisco & DFW Portrait + Event Photographer | Lensworks Photography" />
   <meta name="twitter:description" content="Professional portrait and event photographer serving Frisco, Plano, Allen, McKinney, and all of DFW." />
-  <meta name="twitter:image" content="https://lensworksphoto.com/images/IMG_0486.png" />
+  <meta name="twitter:image" content="https://lensworksphoto.com/images/hero.jpg" />
 
   <!-- Local Business Schema -->
   <script type="application/ld+json">
@@ -34,7 +40,11 @@
     "url": "https://lensworksphoto.com",
     "telephone": "+12149406876",
     "email": "akshay@lensworksphoto.com",
-    "image": "https://lensworksphoto.com/images/IMG_0486.png",
+    "founder": {
+      "@type": "Person",
+      "name": "Akshay Gadey"
+    },
+    "image": "https://lensworksphoto.com/images/hero.jpg",
     "logo": "https://lensworksphoto.com/images/IMG_0486.png",
     "priceRange": "$$",
     "address": {
@@ -89,344 +99,407 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Hero image -->
+  <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high">
 
   <!-- GLightbox -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
 
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor" aria-hidden="true"></div>
+
   <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="#hero" class="nav__logo">Lensworks</a>
-      <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav__links" id="nav-links">
-        <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#booking" class="nav__link nav__link--cta">Book a Session</a></li>
-      </ul>
+  <header class="site-nav" id="site-nav">
+    <a href="#top" class="brand" data-cursor>Lensworks</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#work" data-cursor>Work</a>
+      <a href="#portfolio" data-cursor>Archive</a>
+      <a href="#about" data-cursor>About</a>
+      <a href="#contact" data-cursor>Contact</a>
+    </nav>
+    <a href="#contact" class="btn-ghost nav-cta hide-sm" data-cursor>Book a Session</a>
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+    <a href="#work" class="mm-link" style="--md:.05s">Selected <em>Work</em></a>
+    <a href="#portfolio" class="mm-link" style="--md:.12s">The <em>Archive</em></a>
+    <a href="#about" class="mm-link" style="--md:.19s">About</a>
+    <a href="#contact" class="mm-link" style="--md:.26s">Book a <em>Session</em></a>
+    <div class="mm-foot">
+      <a href="tel:+12149406876">(214) 940-6876</a>
+      <a href="mailto:akshay@lensworksphoto.com">akshay@lensworksphoto.com</a>
+      <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer">@lensworks.photo</a>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero__design">
-      <svg class="hero__svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0.18"/>
-            <stop offset="40%"  stop-color="#c9a84c" stop-opacity="0.05"/>
-            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="centerDot" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#c9a84c" stop-opacity="0.9"/>
-            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
+  <main id="top">
 
-        <!-- Background -->
-        <rect width="1440" height="900" fill="#0d0d0d"/>
-
-        <!-- Ambient glow -->
-        <ellipse cx="720" cy="450" rx="500" ry="380" fill="url(#bgGlow)"/>
-
-        <!-- Concentric rings -->
-        <circle cx="720" cy="450" r="60"  fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-opacity="0.9"/>
-        <circle cx="720" cy="450" r="140" fill="none" stroke="#c9a84c" stroke-width="1"   stroke-opacity="0.5" stroke-dasharray="8 6">
-          <animateTransform attributeName="transform" type="rotate" from="0 720 450" to="360 720 450" dur="22s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="720" cy="450" r="240" fill="none" stroke="#c9a84c" stroke-width="1"   stroke-opacity="0.3"/>
-        <circle cx="720" cy="450" r="360" fill="none" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.18" stroke-dasharray="12 8">
-          <animateTransform attributeName="transform" type="rotate" from="0 720 450" to="-360 720 450" dur="36s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="720" cy="450" r="500" fill="none" stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.10"/>
-        <circle cx="720" cy="450" r="660" fill="none" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.06"/>
-
-        <!-- Crosshair lines -->
-        <line x1="720" y1="0"   x2="720" y2="900" stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.18"/>
-        <line x1="0"   y1="450" x2="1440" y2="450" stroke="#c9a84c" stroke-width="0.6" stroke-opacity="0.18"/>
-        <line x1="0"   y1="0"   x2="1440" y2="900" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.09"/>
-        <line x1="1440" y1="0"  x2="0"    y2="900" stroke="#c9a84c" stroke-width="0.4" stroke-opacity="0.09"/>
-
-        <!-- Tick marks on h/v lines -->
-        <line x1="720" y1="386" x2="720" y2="396" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
-        <line x1="720" y1="504" x2="720" y2="514" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
-        <line x1="656" y1="450" x2="666" y2="450" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
-        <line x1="774" y1="450" x2="784" y2="450" stroke="#c9a84c" stroke-width="1" stroke-opacity="0.5"/>
-
-        <!-- Center dot glow -->
-        <circle cx="720" cy="450" r="50" fill="url(#centerDot)" opacity="0.6">
-          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3.5s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="720" cy="450" r="5" fill="#c9a84c" opacity="0.9"/>
-      </svg>
-    </div>
-    <div class="hero__content">
-      <p class="hero__sub fade-up">Portrait &amp; Event Photography · Frisco, TX</p>
-      <h1 class="hero__title fade-up">Lensworks</h1>
-      <p class="hero__tagline fade-up">Capturing moments that last a lifetime.</p>
-      <p class="hero__location fade-up">Serving Frisco · Plano · Allen · McKinney · all of DFW</p>
-      <div class="hero__ctas fade-up">
-        <a href="#portfolio" class="btn btn--primary">View Work</a>
-        <a href="#booking" class="btn btn--outline">Book a Session</a>
+    <!-- HERO -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-media" data-parallax data-speed="0.16">
+        <img src="images/hero.jpg" alt="Couple celebrating under warm string lights at an event in Frisco TX — Lensworks Photography" fetchpriority="high">
       </div>
-    </div>
-    <a href="#portfolio" class="hero__scroll" aria-label="Scroll down">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
-    </a>
-  </section>
+      <div class="hero-scrim" aria-hidden="true"></div>
 
-  <!-- ABOUT -->
-  <section class="section about" id="about">
-    <div class="container about__inner">
-      <div class="about__image fade-up">
-        <img src="images/IMG_0486.png" alt="Akshay — Frisco & DFW portrait and event photographer, Lensworks Photography">
-      </div>
-      <div class="about__text fade-up">
-        <h2 class="section__title">The Lens Behind the Work</h2>
-        <p>I'm a Frisco, TX-based photographer specializing in portraits and events. Whether it's a personal shoot or a full event, I focus on capturing the moments that actually matter to you.</p>
-        <p>Portraits are where I get to slow down and bring out the real you. Events are where I stay ready, because the best shots don't wait around. Either way, the goal is always the same: photos you'll actually love.</p>
-        <p>I serve clients across Frisco, Plano, Allen, McKinney, The Colony, Little Elm, and the greater Dallas–Fort Worth area.</p>
-        <a href="#booking" class="btn btn--primary" style="margin-top:2rem; display:inline-block;">Work With Us</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section class="section portfolio" id="portfolio">
-    <div class="container">
-      <div class="section__header fade-up">
-        <h2 class="section__title">Portfolio</h2>
-        <p class="section__sub">Select a category to explore</p>
-      </div>
-
-      <div class="portfolio-cards fade-up">
-        <button class="portfolio-card" data-category="portraits">Portrait</button>
-        <button class="portfolio-card" data-category="events">Events</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- BOOKING -->
-  <section class="section booking" id="booking">
-    <div class="container">
-      <div class="section__header fade-up">
-        <h2 class="section__title">Book a Session</h2>
-        <p class="section__sub">Ready to create something? Reach out below.</p>
-        <p class="section__sub" style="font-size:0.85rem; margin-top:0.5rem; opacity:0.65;">Available for sessions throughout Frisco, Plano, Allen, McKinney, and the greater DFW area.</p>
-      </div>
-
-      <div class="booking-grid">
-
-        <!-- Instagram DM -->
-        <div class="booking-card fade-left">
-          <div class="booking-card__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-            </svg>
+      <div class="hero-top" data-reveal>
+        <div class="hero-top-in">
+          <div class="hero-booking">
+            <div class="eyebrow eyebrow--tick">Currently booking</div>
+            <p>Portraits &amp; events for the <span style="white-space:nowrap">2026&ndash;27 season.</span></p>
           </div>
-          <h3 class="booking-card__title">Message on Instagram</h3>
-          <p class="booking-card__desc">The fastest way to connect. Send a DM and we'll get back to you quickly.</p>
-          <a href="https://ig.me/m/lensworks.photo" target="_blank" rel="noopener noreferrer" class="btn btn--instagram">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-            </svg>
-            DM @lensworks.photo
+          <div class="hero-meta hide-sm">
+            <div>Frisco, Texas</div>
+            <div class="dim">Serving all of DFW</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="hero-bottom-in">
+          <div class="hero-strap">
+            <div class="eyebrow eyebrow--tick">Portrait &amp; Event Photographer</div>
+            <div class="right hide-sm">Frisco &middot; Plano &middot; Allen &middot; McKinney</div>
+          </div>
+          <h1>Akshay <em>Gadey</em><span class="sr-only"> — Lensworks Photography, Frisco TX portrait and event photographer</span></h1>
+          <div class="hero-foot">
+            <p>Portraits, birthdays, and events across Frisco and the greater Dallas&ndash;Fort Worth area &mdash; photographed quietly, as they actually felt.</p>
+            <a href="#work" class="link-under" data-cursor>View selected work <span class="arr">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scrollcue hide-sm" aria-hidden="true">Scroll</div>
+    </section>
+
+    <!-- 01 STATEMENT -->
+    <section class="statement" aria-label="Statement">
+      <div class="statement-in">
+        <div class="eyebrow" data-reveal>01 &mdash; Statement</div>
+        <p data-reveal data-delay="80">I work in the half-light &mdash; the moments before and after. Photographs that hold a feeling rather than a pose, <span class="accent-i">warm, quiet, and entirely yours.</span></p>
+      </div>
+    </section>
+
+    <!-- 02 SELECTED WORK -->
+    <section class="featured" id="work">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">02 &mdash; Selected</div>
+            <h2 class="h-italic">Selected Work</h2>
+          </div>
+          <div class="sec-meta hide-sm">Portraits &amp; events &middot; Frisco, TX</div>
+        </div>
+
+        <div class="feat-grid">
+          <figure class="feat-1" data-reveal>
+            <a href="images/portraits/sphotoshoot-14.jpg" class="frame ratio-45 glightbox" data-gallery="selected" data-title="After Dark — Portrait Session, Lensworks Photography" data-cursor>
+              <img src="images/portraits/sphotoshoot-14.jpg" alt="Night portrait against the Dallas skyline — portrait photographer DFW, Lensworks Photography" loading="lazy">
+            </a>
+            <figcaption>
+              <span class="t"><span class="n">01</span><span class="name">After Dark</span></span>
+              <span class="m">Portrait Session &middot; DFW</span>
+            </figcaption>
+          </figure>
+
+          <figure class="feat-2" data-reveal>
+            <a href="images/events/img_5278.jpg" class="frame ratio-32 glightbox" data-gallery="selected" data-title="An Evening in Bloom — Event Coverage, Lensworks Photography" data-cursor>
+              <img src="images/events/img_5278.jpg" alt="Group celebration under a floral arch — event photographer Frisco TX, Lensworks Photography" loading="lazy">
+            </a>
+            <figcaption>
+              <span class="t"><span class="n">02</span><span class="name">An Evening in Bloom</span></span>
+              <span class="m">Event Coverage &middot; DFW</span>
+            </figcaption>
+          </figure>
+
+          <figure class="feat-3" data-reveal>
+            <a href="images/portraits/bdaypics-102.jpg" class="frame ratio-11 glightbox" data-gallery="selected" data-title="Garden Light — Birthday Portraits, Lensworks Photography" data-cursor>
+              <img src="images/portraits/bdaypics-102.jpg" alt="Birthday portrait session in a garden — portrait photographer Frisco TX, Lensworks Photography" loading="lazy" style="object-position:50% 22%">
+            </a>
+            <figcaption>
+              <span class="t"><span class="n">03</span><span class="name">Garden Light</span></span>
+              <span class="m">Birthday Portraits &middot; Frisco</span>
+            </figcaption>
+          </figure>
+
+          <figure class="feat-4" data-reveal>
+            <a href="images/events/img_5659.jpg" class="frame ratio-45 glightbox" data-gallery="selected" data-title="Confetti Hour — Celebration, Lensworks Photography" data-cursor>
+              <img src="images/events/img_5659.jpg" alt="Candid laughter and confetti at a celebration — event photography DFW, Lensworks Photography" loading="lazy">
+            </a>
+            <figcaption>
+              <span class="t"><span class="n">04</span><span class="name">Confetti Hour</span></span>
+              <span class="m">Celebration &middot; DFW</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 IN MOTION — horizontal scroll -->
+    <section class="hscroll" id="events" aria-label="Events in motion">
+      <div class="hs-stage">
+        <div class="hs-title">
+          <div class="eyebrow">03 &mdash; In Motion</div>
+          <h2 class="h-italic">Events &amp; Celebrations</h2>
+        </div>
+        <div class="hs-track" id="hs-track">
+          <a href="images/events/img_5250.jpg" class="hs-card w-md frame ratio-32 glightbox" data-gallery="motion" data-title="Garden Party — Event Coverage, Lensworks Photography" data-cursor>
+            <img src="images/events/img_5250.jpg" alt="Guests mingling at a garden party — event photographer Frisco TX, Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_6116.jpg" class="hs-card w-sm frame ratio-45 glightbox" data-gallery="motion" data-title="Mother & Daughter — Event Portraits, Lensworks Photography" data-cursor>
+            <img src="images/events/img_6116.jpg" alt="Mother holding her daughter at a celebration — family event photography DFW, Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/bdaypics-27.jpg" class="hs-card w-lg frame ratio-1610 glightbox" data-gallery="motion" data-title="Birthday at Topgolf — Event Coverage, Lensworks Photography" data-cursor>
+            <img src="images/events/bdaypics-27.jpg" alt="Birthday party group at Topgolf — birthday photographer Frisco TX, Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5609-1.jpg" class="hs-card w-sm frame ratio-45 glightbox" data-gallery="motion" data-title="The Details — Event Coverage, Lensworks Photography" data-cursor>
+            <img src="images/events/img_5609-1.jpg" alt="Birthday cake details at a milestone celebration — event photography DFW, Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5655.jpg" class="hs-card w-md frame ratio-32 glightbox" data-gallery="motion" data-title="Set the Scene — Event Coverage, Lensworks Photography" data-cursor>
+            <img src="images/events/img_5655.jpg" alt="Balloon and decor styling at an event venue — event photographer DFW, Lensworks Photography" loading="lazy">
+          </a>
+          <div class="hs-end">
+            <p>The day, as it actually felt.</p>
+            <a href="#contact" class="link-accent" data-cursor>Book a date &rarr;</a>
+          </div>
+        </div>
+        <div class="hs-progress" aria-hidden="true"><b id="hs-progress"></b></div>
+      </div>
+    </section>
+
+    <!-- 04 THE ARCHIVE -->
+    <section class="archive" id="portfolio">
+      <div class="wrap">
+        <div class="archive-head">
+          <div>
+            <div class="eyebrow" data-reveal>04 &mdash; The Archive</div>
+            <h2 class="h-serif" data-reveal data-delay="70">Full <span class="accent-i">Portfolio</span></h2>
+          </div>
+          <div class="cat-toggle" data-reveal data-delay="140" role="group" aria-label="Portfolio category">
+            <button type="button" class="cat-btn" data-cat="portraits" aria-pressed="true" data-cursor>Portraits</button>
+            <button type="button" class="cat-btn" data-cat="events" aria-pressed="false" data-cursor>Events</button>
+          </div>
+        </div>
+
+        <div class="gallery" data-gallery-grid="portraits">
+          <a href="images/portraits/sphotoshoot-3.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/sphotoshoot-3.jpg" alt="Individual portrait session DFW — Lensworks Photography Frisco TX" loading="lazy">
+          </a>
+          <a href="images/portraits/sphotoshoot-6.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/sphotoshoot-6.jpg" alt="Portrait photo shoot Frisco TX — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/portraits/sphotoshoot-9.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/sphotoshoot-9.jpg" alt="Professional portrait session Plano Allen DFW — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/portraits/sphotoshoot-12.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/sphotoshoot-12.jpg" alt="Portrait photography near Dallas TX — Lensworks Photography Frisco" loading="lazy">
+          </a>
+          <a href="images/portraits/sphotoshoot-14.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/sphotoshoot-14.jpg" alt="McKinney Frisco portrait photographer — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/portraits/bdaypics-99.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/bdaypics-99.jpg" alt="Portrait photography session in Frisco TX — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/portraits/bdaypics-102.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/bdaypics-102.jpg" alt="Professional portrait photographer DFW — Lensworks Photography Frisco" loading="lazy">
+          </a>
+          <a href="images/portraits/bdaypics-104.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/portraits/bdaypics-104.jpg" alt="Portrait photographer Frisco Texas — Lensworks Photography" loading="lazy">
           </a>
         </div>
 
-        <!-- Contact Form -->
-        <div class="booking-card fade-right">
-          <div class="booking-card__icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
+        <div class="gallery" data-gallery-grid="events" hidden>
+          <a href="images/events/img_5263.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5263.jpg" alt="Couple celebrating under string lights — event photographer Frisco TX, Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5278.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5278.jpg" alt="Event photographer Plano Allen DFW — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5284-1.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5284-1.jpg" alt="Event coverage photographer McKinney DFW — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5250.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5250.jpg" alt="Professional event photography Frisco TX — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5347.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5347.jpg" alt="Event photography near The Colony Little Elm — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5609-1.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5609-1.jpg" alt="Event photographer North Dallas DFW — Lensworks Photography Frisco" loading="lazy">
+          </a>
+          <a href="images/events/img_5640.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5640.jpg" alt="Celebration party photographer Frisco Plano TX — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5655.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5655.jpg" alt="Special events photographer DFW metroplex — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_5659.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_5659.jpg" alt="Event photography Allen McKinney Frisco TX — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_6116.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_6116.jpg" alt="Event photographer Frisco TX — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/img_6470-1.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/img_6470-1.jpg" alt="Event photography DFW — Lensworks Photography Frisco Texas" loading="lazy">
+          </a>
+          <a href="images/events/bdaypics-21.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Birthday Celebration — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/bdaypics-21.jpg" alt="Birthday party photographer Frisco TX — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/bdaypics-22.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Birthday Celebration — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/bdaypics-22.jpg" alt="Birthday celebration photographer DFW — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/bdaypics-27.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Birthday Celebration — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/bdaypics-27.jpg" alt="Birthday event photography Frisco Texas — Lensworks Photography" loading="lazy">
+          </a>
+          <a href="images/events/bdaypics-30.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Birthday Celebration — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/bdaypics-30.jpg" alt="Birthday photographer near Plano Allen McKinney TX — Lensworks" loading="lazy">
+          </a>
+          <a href="images/events/bdaypics-38.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Birthday Celebration — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/bdaypics-38.jpg" alt="Celebration event photographer DFW — Lensworks Photography Frisco" loading="lazy">
+          </a>
+          <a href="images/events/bdaypics-40.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Birthday Celebration — Lensworks Photography, Frisco TX" data-cursor>
+            <img src="images/events/bdaypics-40.jpg" alt="Birthday event photographer Dallas Fort Worth — Lensworks Photography" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 ABOUT — pinned crossfade -->
+    <section class="about" id="about">
+      <div class="about-stage">
+        <div class="about-grid">
+          <div class="about-stack" id="about-stack">
+            <div class="about-layer">
+              <img src="images/IMG_0486.png" alt="Akshay Gadey — Frisco & DFW portrait and event photographer, Lensworks Photography" loading="lazy" style="object-position:50% 25%">
+            </div>
+            <div class="about-layer" aria-hidden="true">
+              <img src="images/portraits/sphotoshoot-3.jpg" alt="" loading="lazy">
+            </div>
+            <div class="about-layer" aria-hidden="true">
+              <img src="images/events/img_5659.jpg" alt="" loading="lazy">
+            </div>
           </div>
-          <h3 class="booking-card__title">Send an Inquiry</h3>
-          <p class="booking-card__desc">Fill out the form below and we'll be in touch within 24 hours.</p>
-          <form id="contact-form" action="https://formspree.io/f/mkoygvpg" method="POST" novalidate>
+          <div class="about-copy">
+            <div class="eyebrow eyebrow--tick">05 &mdash; About</div>
+            <h2 class="h-serif">Hello, I'm <span class="accent-i">Akshay.</span></h2>
+            <p>I'm a Frisco, TX-based photographer specializing in portraits and events. Whether it's a personal shoot or a full event, I focus on capturing the moments that actually matter to you.</p>
+            <p>Portraits are where I get to slow down and bring out the real you. Events are where I stay ready, because the best shots don't wait around. Either way, the goal is always the same: photos you'll actually love.</p>
+            <div class="about-services">
+              <div><i>01</i>Portraits</div>
+              <div><i>02</i>Events</div>
+              <div><i>03</i>Birthdays &amp; Celebrations</div>
+              <div><i>04</i>Corporate</div>
+            </div>
+            <p class="about-area">Serving Frisco &middot; Plano &middot; Allen &middot; McKinney &middot; The Colony &middot; Little Elm &middot; DFW</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 INSTAGRAM -->
+    <section class="insta" aria-label="Instagram">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <div class="eyebrow">06 &mdash; Instagram</div>
+            <h2 class="h-italic">Latest frames</h2>
+          </div>
+          <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer" class="link-accent" data-cursor>@lensworks.photo <span aria-hidden="true">&nearr;</span></a>
+        </div>
+        <div class="insta-grid">
+          <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer" class="frame ratio-11" data-reveal data-cursor aria-label="Lensworks Photography on Instagram">
+            <img src="images/events/img_6470-1.jpg" alt="Baby smiling beside pink glitter decor — Lensworks Photography on Instagram" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer" class="frame ratio-11" data-reveal data-delay="60" data-cursor aria-label="Lensworks Photography on Instagram">
+            <img src="images/events/bdaypics-38.jpg" alt="Friends at a Topgolf birthday party — Lensworks Photography on Instagram" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer" class="frame ratio-11" data-reveal data-delay="120" data-cursor aria-label="Lensworks Photography on Instagram">
+            <img src="images/events/img_5640.jpg" alt="Guests gathered at an event venue — Lensworks Photography on Instagram" loading="lazy">
+          </a>
+          <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer" class="frame ratio-11" data-reveal data-delay="180" data-cursor aria-label="Lensworks Photography on Instagram">
+            <img src="images/portraits/sphotoshoot-6.jpg" alt="Portrait at dusk in a parking lot — Lensworks Photography on Instagram" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 07 CONTACT -->
+  <footer class="contact" id="contact">
+    <div class="wrap">
+      <div class="eyebrow" data-reveal>07 &mdash; Contact</div>
+      <h2 class="contact-title h-serif" data-reveal data-delay="80">Let's make something <span class="accent-i">worth remembering.</span></h2>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>Planning a session or an event? Tell me the date and the vision &mdash; I'll handle the light. Based in Frisco, serving the entire Dallas&ndash;Fort Worth metroplex.</p>
+          <a href="mailto:akshay@lensworksphoto.com" class="contact-email" data-cursor>akshay@lensworksphoto.com</a>
+          <div class="contact-ways">
+            <a href="https://ig.me/m/lensworks.photo" target="_blank" rel="noopener noreferrer" data-cursor>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              DM @lensworks.photo
+            </a>
+            <a href="tel:+12149406876" data-cursor>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              (214) 940-6876
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form-col">
+          <h3 class="form-head">Or send an inquiry</h3>
+          <form id="contact-form" class="form-grid" action="https://formspree.io/f/mkoygvpg" method="POST" novalidate>
             <input type="hidden" name="_subject" value="New booking inquiry — Lensworks Photography">
-            <div class="form-group">
-              <label for="name">Your Name</label>
+            <div class="field">
+              <label for="name">Your name</label>
               <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
             </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
+            <div class="field">
+              <label for="email">Email address</label>
               <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email">
             </div>
-            <div class="form-group">
-              <label for="type">Session Type</label>
+            <div class="field field--full">
+              <label for="type">Session type</label>
               <select id="type" name="session_type">
-                <option value="">Select a session type...</option>
+                <option value="">Select a session type&hellip;</option>
                 <option value="Portrait Session">Portrait Session</option>
                 <option value="Birthday / Celebration">Birthday / Celebration</option>
                 <option value="Event Coverage">Event Coverage</option>
                 <option value="Other">Other</option>
               </select>
             </div>
-            <div class="form-group">
+            <div class="field field--full">
               <label for="message">Message</label>
               <textarea id="message" name="message" rows="4" placeholder="Tell me about your vision, dates, location..." required></textarea>
             </div>
-            <button type="submit" class="btn btn--primary btn--full">Send Message</button>
+            <div class="field--full">
+              <button type="submit" class="btn-solid" data-cursor>Send inquiry</button>
+            </div>
+            <p class="form-note">I reply within 24 hours &mdash; or DM <a href="https://ig.me/m/lensworks.photo" target="_blank" rel="noopener noreferrer" style="text-decoration:underline">@lensworks.photo</a> for the fastest response.</p>
           </form>
         </div>
-
       </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <a href="#hero" class="footer__logo">Lensworks</a>
-      <div class="footer__socials">
-        <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-          @lensworks.photo
-        </a>
-        <a href="mailto:akshay@lensworksphoto.com" class="footer__social-link" aria-label="Email">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          akshay@lensworksphoto.com
-        </a>
+      <div class="foot-bar">
+        <span>&copy; <span id="year">2026</span> Lensworks Photography &middot; Akshay Gadey</span>
+        <span class="hide-sm">Lensworks Photography &middot; Frisco, TX &middot; <a href="tel:+12149406876">(214) 940-6876</a></span>
+        <a href="https://www.instagram.com/lensworks.photo" target="_blank" rel="noopener noreferrer">Instagram &nearr;</a>
       </div>
-      <p class="footer__nap">
-        Lensworks Photography &middot; Frisco, TX<br>
-        <a href="tel:+12149406876" class="footer__nap-link">(214) 940-6876</a> &middot;
-        <a href="mailto:akshay@lensworksphoto.com" class="footer__nap-link">akshay@lensworksphoto.com</a><br>
-        Serving Frisco &middot; Plano &middot; Allen &middot; McKinney &middot; DFW
-      </p>
-      <p class="footer__copy">&copy; 2025 Lensworks Photography. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- PORTFOLIO MODAL -->
-  <div class="pf-modal" id="portfolio-modal"
-       role="dialog" aria-modal="true"
-       aria-labelledby="pf-modal-title" aria-hidden="true">
-
-    <div class="pf-modal__backdrop" id="pf-modal-backdrop"></div>
-
-    <div class="pf-modal__panel" id="pf-modal-panel" tabindex="-1">
-      <div class="pf-modal__header">
-        <h2 class="pf-modal__title" id="pf-modal-title">Portraits</h2>
-        <button class="pf-modal__close" id="pf-modal-close" aria-label="Close gallery">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-      <div class="pf-modal__body" id="pf-modal-body">
-
-        <!-- Portraits gallery -->
-        <div class="gallery-grid" data-grid="portraits">
-          <a href="images/portraits/bdaypics-99.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/bdaypics-99.jpg" alt="Portrait photography session in Frisco TX — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/portraits/bdaypics-102.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/bdaypics-102.jpg" alt="Professional portrait photographer DFW — Lensworks Photography Frisco" loading="lazy">
-          </a>
-          <a href="images/portraits/bdaypics-104.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/bdaypics-104.jpg" alt="Portrait photographer Frisco Texas — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/portraits/sphotoshoot-3.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/sphotoshoot-3.jpg" alt="Individual portrait session DFW — Lensworks Photography Frisco TX" loading="lazy">
-          </a>
-          <a href="images/portraits/sphotoshoot-6.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/sphotoshoot-6.jpg" alt="Portrait photo shoot Frisco TX — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/portraits/sphotoshoot-9.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/sphotoshoot-9.jpg" alt="Professional portrait session Plano Allen DFW — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/portraits/sphotoshoot-12.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/sphotoshoot-12.jpg" alt="Portrait photography near Dallas TX — Lensworks Photography Frisco" loading="lazy">
-          </a>
-          <a href="images/portraits/sphotoshoot-14.jpg" class="glightbox gallery-item" data-gallery="portraits-modal" data-title="Portrait Session — Lensworks Photography, Frisco TX">
-            <img src="images/portraits/sphotoshoot-14.jpg" alt="McKinney Frisco portrait photographer — Lensworks Photography" loading="lazy">
-          </a>
-        </div>
-
-        <!-- Events gallery -->
-        <div class="gallery-grid" data-grid="events" hidden>
-          <a href="images/events/img_6116.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_6116.jpg" alt="Event photographer Frisco TX — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_6470-1.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_6470-1.jpg" alt="Event photography DFW — Lensworks Photography Frisco Texas" loading="lazy">
-          </a>
-          <a href="images/events/bdaypics-21.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Birthday Celebration — Lensworks Photography, Frisco TX">
-            <img src="images/events/bdaypics-21.jpg" alt="Birthday party photographer Frisco TX — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/bdaypics-22.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Birthday Celebration — Lensworks Photography, Frisco TX">
-            <img src="images/events/bdaypics-22.jpg" alt="Birthday celebration photographer DFW — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/bdaypics-27.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Birthday Celebration — Lensworks Photography, Frisco TX">
-            <img src="images/events/bdaypics-27.jpg" alt="Birthday event photography Frisco Texas — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/bdaypics-30.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Birthday Celebration — Lensworks Photography, Frisco TX">
-            <img src="images/events/bdaypics-30.jpg" alt="Birthday photographer near Plano Allen McKinney TX — Lensworks" loading="lazy">
-          </a>
-          <a href="images/events/bdaypics-38.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Birthday Celebration — Lensworks Photography, Frisco TX">
-            <img src="images/events/bdaypics-38.jpg" alt="Celebration event photographer DFW — Lensworks Photography Frisco" loading="lazy">
-          </a>
-          <a href="images/events/bdaypics-40.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Birthday Celebration — Lensworks Photography, Frisco TX">
-            <img src="images/events/bdaypics-40.jpg" alt="Birthday event photographer Dallas Fort Worth — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5250.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5250.jpg" alt="Professional event photography Frisco TX — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5263.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5263.jpg" alt="Event photographer Plano Allen DFW — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5278.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5278.jpg" alt="Corporate event photographer Frisco Texas — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5284-1.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5284-1.jpg" alt="Event coverage photographer McKinney DFW — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5347.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5347.jpg" alt="Event photography near The Colony Little Elm — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5609-1.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5609-1.jpg" alt="Event photographer North Dallas DFW — Lensworks Photography Frisco" loading="lazy">
-          </a>
-          <a href="images/events/img_5640.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5640.jpg" alt="Celebration party photographer Frisco Plano TX — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5655.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5655.jpg" alt="Special events photographer DFW metroplex — Lensworks Photography" loading="lazy">
-          </a>
-          <a href="images/events/img_5659.jpg" class="glightbox gallery-item" data-gallery="events-modal" data-title="Event Photography — Lensworks Photography, Frisco TX">
-            <img src="images/events/img_5659.jpg" alt="Event photography Allen McKinney Frisco TX — Lensworks Photography" loading="lazy">
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
   <!-- GLightbox JS -->
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

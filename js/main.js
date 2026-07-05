@@ -1,182 +1,209 @@
-/* =============================================
-   LENSWORKS PHOTOGRAPHY — MAIN JS
-   ============================================= */
+/* ==========================================================================
+   LENSWORKS PHOTOGRAPHY — Nocturne interactions
+   ========================================================================== */
+(() => {
+  'use strict';
 
-// --- Nav scroll effect ---
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('nav--scrolled', window.scrollY > 60);
-}, { passive: true });
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
 
-// --- Mobile hamburger menu ---
-const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('nav-links');
+  /* ---------- Nav scrolled state ---------- */
+  const nav = document.getElementById('site-nav');
+  const onNavScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+  onNavScroll();
 
-hamburger.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-
-// Close menu when a nav link is clicked
-navLinks.querySelectorAll('.nav__link').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
+  /* ---------- Mobile menu ---------- */
+  const burger = document.getElementById('nav-burger');
+  const menu = document.getElementById('mobile-menu');
+  const setMenu = (open) => {
+    menu.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  burger.addEventListener('click', () => setMenu(!menu.classList.contains('is-open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) setMenu(false);
   });
-});
 
-// --- GLightbox initialization ---
-const lightbox = GLightbox({
-  touchNavigation: true,
-  loop: true,
-  autoplayVideos: false,
-  openEffect: 'fade',
-  closeEffect: 'fade',
-  cssEfects: {
-    fade: { in: 'fadeIn', out: 'fadeOut' }
+  /* ---------- Scroll reveals ---------- */
+  const reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+  const showAll = () => reveals.forEach(el => el.classList.add('is-in'));
+  if (!prefersReduced && 'IntersectionObserver' in window && reveals.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          const el = en.target;
+          el.style.setProperty('--rd', (parseFloat(el.dataset.delay) || 0) + 'ms');
+          el.classList.add('is-in');
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+    // Safety net: never leave content hidden if the observer misfires
+    setTimeout(showAll, 3500);
+  } else {
+    showAll();
   }
-});
 
-// --- Intersection Observer for scroll animations ---
-const scrollObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      scrollObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+  /* ---------- Custom cursor (fine pointers only) ---------- */
+  const cur = document.getElementById('cursor');
+  if (cur && !prefersReduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my, shown = false;
+    window.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!shown) { shown = true; cur.style.opacity = '1'; }
+    }, { passive: true });
+    const tick = () => {
+      cx += (mx - cx) * 0.18;
+      cy += (my - cy) * 0.18;
+      const s = cur.classList.contains('is-hover') ? 1.5 : 1;
+      cur.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%) scale(${s})`;
+      requestAnimationFrame(tick);
+    };
+    tick();
+    document.querySelectorAll('[data-cursor]').forEach(el => {
+      el.addEventListener('mouseenter', () => cur.classList.add('is-hover'));
+      el.addEventListener('mouseleave', () => cur.classList.remove('is-hover'));
+    });
+  }
 
-// fade-up & fade-left/right (skip hero — uses keyframe animation)
-document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => {
-  if (!el.closest('.hero')) scrollObserver.observe(el);
-});
+  /* ---------- GLightbox ---------- */
+  if (window.GLightbox) {
+    GLightbox({
+      touchNavigation: true,
+      loop: true,
+      autoplayVideos: false,
+      openEffect: 'fade',
+      closeEffect: 'fade'
+    });
+  }
 
-// --- Gallery stagger animation ---
-function staggerGrid(grid) {
-  const items = grid.querySelectorAll('.gallery-item');
-  items.forEach((item, i) => {
-    item.classList.remove('visible');
-    item.style.setProperty('--stagger', `${i * 0.055}s`);
-  });
-  // Small rAF so removing .visible has time to reset before re-adding
-  requestAnimationFrame(() => {
-    items.forEach(item => item.classList.add('visible'));
-  });
-}
+  /* ---------- Archive category toggle ---------- */
+  const catBtns = Array.from(document.querySelectorAll('.cat-btn'));
+  const grids = Array.from(document.querySelectorAll('[data-gallery-grid]'));
+  const setCat = (name) => {
+    catBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cat === name)));
+    grids.forEach(g => {
+      const on = g.dataset.galleryGrid === name;
+      g.hidden = !on;
+      if (!on) return;
+      const tiles = g.querySelectorAll('.tile');
+      tiles.forEach((t, i) => {
+        t.classList.add('is-out');
+        t.style.setProperty('--d', (40 + i * 45) + 'ms');
+      });
+      // Double rAF so the hidden state paints before the staggered entrance
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        tiles.forEach(t => t.classList.remove('is-out'));
+      }));
+    });
+  };
+  catBtns.forEach(b => b.addEventListener('click', () => setCat(b.dataset.cat)));
 
-// --- Portfolio modal ---
-(function () {
-  const modal     = document.getElementById('portfolio-modal');
-  const backdrop  = document.getElementById('pf-modal-backdrop');
-  const panel     = document.getElementById('pf-modal-panel');
-  const titleEl   = document.getElementById('pf-modal-title');
-  const closeBtn  = document.getElementById('pf-modal-close');
-  const modalBody = document.getElementById('pf-modal-body');
-  const grids     = modalBody.querySelectorAll('.gallery-grid');
+  /* ---------- Scroll engine: parallax, horizontal strip, about crossfade ---------- */
+  const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+  const hsec = document.querySelector('.hscroll');
+  const htrack = document.getElementById('hs-track');
+  const hfill = document.getElementById('hs-progress');
+  const about = document.querySelector('.about');
+  const aboutLayers = about ? Array.from(about.querySelectorAll('.about-layer')) : [];
 
-  let lastFocused = null;
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    if (prefersReduced) return;
+    const vh = innerHeight;
+    const mobile = isMobile();
 
-  function openModal(category) {
-    lastFocused = document.activeElement;
-
-    grids.forEach(grid => {
-      const show = grid.dataset.grid === category;
-      grid.hidden = !show;
-      if (show) {
-        titleEl.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-        modalBody.scrollTop = 0;
-        staggerGrid(grid);
-      }
+    parallaxEls.forEach(el => {
+      const sp = parseFloat(el.dataset.speed || '0.08');
+      const r = el.getBoundingClientRect();
+      const center = r.top + r.height / 2 - vh / 2;
+      el.style.transform = `translate3d(0,${(-center * sp).toFixed(1)}px,0)`;
     });
 
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-
-    setTimeout(() => {
-      panel.focus();
-      lightbox.reload();
-    }, 420);
-  }
-
-  function closeModal() {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-
-    if (lastFocused) { lastFocused.focus(); lastFocused = null; }
-  }
-
-  function trapFocus(e) {
-    if (!modal.classList.contains('is-open')) return;
-    const focusable = panel.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
-    const first = focusable[0];
-    const last  = focusable[focusable.length - 1];
-    if (e.key === 'Tab') {
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    if (hsec && htrack && !mobile) {
+      const total = hsec.offsetHeight - vh;
+      const r = hsec.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / total));
+      const maxX = htrack.scrollWidth - innerWidth;
+      htrack.style.transform = `translate3d(${(-p * maxX).toFixed(1)}px,0,0)`;
+      if (hfill) hfill.style.transform = `scaleX(${p})`;
+    } else if (htrack) {
+      // Mobile uses native horizontal scroll
+      htrack.style.transform = '';
     }
-  }
 
-  document.querySelectorAll('.portfolio-card').forEach(card => {
-    card.addEventListener('click', () => openModal(card.dataset.category));
-  });
-
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', closeModal);
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-  });
-  panel.addEventListener('keydown', trapFocus);
-})();
-
-// --- Formspree AJAX form submission ---
-const form = document.getElementById('contact-form');
-if (form) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const submitBtn = form.querySelector('[type="submit"]');
-    const originalText = submitBtn.textContent;
-
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+    if (about && aboutLayers.length && !mobile) {
+      const total = about.offsetHeight - vh;
+      const r = about.getBoundingClientRect();
+      const p = Math.min(0.9999, Math.max(0, -r.top / total));
+      const fpos = p * (aboutLayers.length - 1);
+      aboutLayers.forEach((ly, i) => {
+        const o = Math.max(0, 1 - Math.abs(fpos - i));
+        ly.style.opacity = (i === 0 && fpos < 0.001) ? 1 : o;
+        ly.style.transform = `scale(${1 + (1 - o) * 0.04})`;
       });
-
-      if (response.ok) {
-        form.innerHTML = '<p class="form-success">Thank you! I\'ll be in touch within 24 hours.</p>';
-      } else {
-        const data = await response.json().catch(() => ({}));
-        const msg = data?.errors?.map(e => e.message).join(', ') || 'Something went wrong.';
-        showFormError(submitBtn, originalText, msg);
-      }
-    } catch {
-      showFormError(submitBtn, originalText, 'Network error. Please DM on Instagram.');
+    } else {
+      aboutLayers.forEach(ly => { ly.style.opacity = ''; ly.style.transform = ''; });
     }
-  });
-}
+  };
+  const onScroll = () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 
-function showFormError(btn, originalText, message) {
-  btn.textContent = originalText;
-  btn.disabled = false;
+  /* ---------- Formspree AJAX ---------- */
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  let errEl = document.getElementById('form-error');
-  if (!errEl) {
-    errEl = document.createElement('p');
-    errEl.id = 'form-error';
-    errEl.style.cssText = 'color:#e05555;font-size:0.875rem;margin-top:0.75rem;text-align:center;';
-    btn.parentNode.insertBefore(errEl, btn.nextSibling);
+      const submitBtn = form.querySelector('[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.innerHTML = '<p class="form-success">Thank you — your inquiry is on its way. I’ll be in touch within 24 hours.</p>';
+        } else {
+          const data = await response.json().catch(() => ({}));
+          const msg = (data && data.errors && data.errors.map(er => er.message).join(', ')) || 'Something went wrong.';
+          showFormError(submitBtn, originalText, msg);
+        }
+      } catch {
+        showFormError(submitBtn, originalText, 'Network error — please DM @lensworks.photo on Instagram.');
+      }
+    });
   }
-  errEl.textContent = message;
-}
+
+  function showFormError(btn, originalText, message) {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    let errEl = document.getElementById('form-error');
+    if (!errEl) {
+      errEl = document.createElement('p');
+      errEl.id = 'form-error';
+      errEl.className = 'form-error';
+      form.appendChild(errEl);
+    }
+    errEl.textContent = message;
+  }
+
+  /* ---------- Footer year ---------- */
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+})();

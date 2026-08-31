@@ -49,28 +49,6 @@
     showAll();
   }
 
-  /* ---------- Custom cursor (fine pointers only) ---------- */
-  const cur = document.getElementById('cursor');
-  if (cur && !prefersReduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my, shown = false;
-    window.addEventListener('mousemove', (e) => {
-      mx = e.clientX; my = e.clientY;
-      if (!shown) { shown = true; cur.style.opacity = '1'; }
-    }, { passive: true });
-    const tick = () => {
-      cx += (mx - cx) * 0.18;
-      cy += (my - cy) * 0.18;
-      const s = cur.classList.contains('is-hover') ? 1.5 : 1;
-      cur.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%) scale(${s})`;
-      requestAnimationFrame(tick);
-    };
-    tick();
-    document.querySelectorAll('[data-cursor]').forEach(el => {
-      el.addEventListener('mouseenter', () => cur.classList.add('is-hover'));
-      el.addEventListener('mouseleave', () => cur.classList.remove('is-hover'));
-    });
-  }
-
   /* ---------- GLightbox ---------- */
   if (window.GLightbox) {
     GLightbox({
@@ -104,13 +82,10 @@
   };
   catBtns.forEach(b => b.addEventListener('click', () => setCat(b.dataset.cat)));
 
-  /* ---------- Scroll engine: parallax, horizontal strip, about crossfade ---------- */
-  const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+  /* ---------- Scroll engine: horizontal strip ---------- */
   const hsec = document.querySelector('.hscroll');
   const htrack = document.getElementById('hs-track');
   const hfill = document.getElementById('hs-progress');
-  const about = document.querySelector('.about');
-  const aboutLayers = about ? Array.from(about.querySelectorAll('.about-layer')) : [];
 
   let ticking = false;
   const update = () => {
@@ -118,13 +93,6 @@
     if (prefersReduced) return;
     const vh = innerHeight;
     const mobile = isMobile();
-
-    parallaxEls.forEach(el => {
-      const sp = parseFloat(el.dataset.speed || '0.08');
-      const r = el.getBoundingClientRect();
-      const center = r.top + r.height / 2 - vh / 2;
-      el.style.transform = `translate3d(0,${(-center * sp).toFixed(1)}px,0)`;
-    });
 
     if (hsec && htrack && !mobile) {
       const total = hsec.offsetHeight - vh;
@@ -136,20 +104,6 @@
     } else if (htrack) {
       // Mobile uses native horizontal scroll
       htrack.style.transform = '';
-    }
-
-    if (about && aboutLayers.length && !mobile) {
-      const total = about.offsetHeight - vh;
-      const r = about.getBoundingClientRect();
-      const p = Math.min(0.9999, Math.max(0, -r.top / total));
-      const fpos = p * (aboutLayers.length - 1);
-      aboutLayers.forEach((ly, i) => {
-        const o = Math.max(0, 1 - Math.abs(fpos - i));
-        ly.style.opacity = (i === 0 && fpos < 0.001) ? 1 : o;
-        ly.style.transform = `scale(${1 + (1 - o) * 0.04})`;
-      });
-    } else {
-      aboutLayers.forEach(ly => { ly.style.opacity = ''; ly.style.transform = ''; });
     }
   };
   const onScroll = () => {

@@ -1,19 +1,41 @@
 /* ==========================================================================
    LENSWORKS PHOTOGRAPHY — Nocturne interactions
+
+   You will RARELY need to edit this file. It only handles behavior:
+     1. Making the top nav bar shrink/blur once you scroll
+     2. Opening/closing the mobile burger menu
+     3. Fading sections in as they scroll into view
+     4. The pop-up photo viewer (GLightbox)
+     5. The Portraits/Events tab switch in the Archive
+     6. The sideways-sliding photo strip (section 03)
+     7. Sending the contact form + its success/error messages
+        ← the one place you might edit: the message wording is in the
+          "Formspree AJAX" block near the bottom
+     8. Keeping the © year in the footer current automatically
+
+   Each numbered block below is independent — a mistake in one doesn't
+   break the others. After editing, bump "?v=5" on the main.js line at the
+   bottom of index.html so browsers load your new version.
    ========================================================================== */
 (() => {
   'use strict';
 
+  // True if the visitor's device asks for less animation (accessibility)
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // True on phone-sized screens (must match the 860px breakpoint in the CSS)
   const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
 
-  /* ---------- Nav scrolled state ---------- */
+  /* ---------- 1. Nav scrolled state ----------
+     Adds the "is-scrolled" class after 60px of scrolling; the CSS uses it
+     to shrink the bar and add the blurred background. */
   const nav = document.getElementById('site-nav');
   const onNavScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 60);
   window.addEventListener('scroll', onNavScroll, { passive: true });
   onNavScroll();
 
-  /* ---------- Mobile menu ---------- */
+  /* ---------- 2. Mobile menu ----------
+     Burger button opens/closes the full-screen menu. Escape key closes it,
+     and tapping any menu link closes it too. */
   const burger = document.getElementById('nav-burger');
   const menu = document.getElementById('mobile-menu');
   const setMenu = (open) => {
@@ -28,7 +50,9 @@
     if (e.key === 'Escape' && menu.classList.contains('is-open')) setMenu(false);
   });
 
-  /* ---------- Scroll reveals ---------- */
+  /* ---------- 3. Scroll reveals ----------
+     Anything in index.html with a data-reveal attribute starts invisible
+     and fades in when it scrolls into view (data-delay staggers timing). */
   const reveals = Array.from(document.querySelectorAll('[data-reveal]'));
   const showAll = () => reveals.forEach(el => el.classList.add('is-in'));
   if (!prefersReduced && 'IntersectionObserver' in window && reveals.length) {
@@ -49,7 +73,9 @@
     showAll();
   }
 
-  /* ---------- GLightbox ---------- */
+  /* ---------- 4. GLightbox ----------
+     Turns every element with class="glightbox" into a click-to-open
+     full-screen photo viewer. Settings reference: glightbox docs. */
   if (window.GLightbox) {
     GLightbox({
       touchNavigation: true,
@@ -60,7 +86,9 @@
     });
   }
 
-  /* ---------- Archive category toggle ---------- */
+  /* ---------- 5. Archive category toggle ----------
+     The Portraits / Events buttons: shows the matching gallery grid and
+     hides the other, with a small staggered fade-in for the tiles. */
   const catBtns = Array.from(document.querySelectorAll('.cat-btn'));
   const grids = Array.from(document.querySelectorAll('[data-gallery-grid]'));
   const setCat = (name) => {
@@ -82,7 +110,11 @@
   };
   catBtns.forEach(b => b.addEventListener('click', () => setCat(b.dataset.cat)));
 
-  /* ---------- Scroll engine: horizontal strip ---------- */
+  /* ---------- 6. Scroll engine: horizontal strip (section 03) ----------
+     On desktop: as the visitor scrolls down through the tall .hscroll
+     section, this slides the photo strip sideways and fills the progress
+     bar. On phones the strip is a normal swipe gallery, so this is skipped.
+     To make the ride longer/shorter, change "height: 340vh" in the CSS. */
   const hsec = document.querySelector('.hscroll');
   const htrack = document.getElementById('hs-track');
   const hfill = document.getElementById('hs-progress');
@@ -113,7 +145,10 @@
   window.addEventListener('resize', onScroll);
   update();
 
-  /* ---------- Formspree AJAX ---------- */
+  /* ---------- 7. Formspree AJAX (contact form) ----------
+     Sends the inquiry to Formspree without leaving the page. The visitor-
+     facing wording (the "Thank you..." success message and the error
+     messages) is in the quoted strings below — edit those freely. */
   const form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -157,7 +192,8 @@
     errEl.textContent = message;
   }
 
-  /* ---------- Footer year ---------- */
+  /* ---------- 8. Footer year ----------
+     Auto-fills the © year so you never have to update it by hand. */
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 })();

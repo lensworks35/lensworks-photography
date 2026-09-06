@@ -1,3 +1,25 @@
+/* ==========================================================================
+   IMAGE OPTIMIZER — prepares your camera photos for the website.
+
+   WHAT IT DOES: takes every photo from LensworksPortoflio/Events and
+   LensworksPortoflio/Photoshoots, shrinks it to web size (max 1200px,
+   ~200KB instead of several MB), fixes rotation, cleans up the filename
+   (spaces → hyphens, lowercase), and saves the result into images/events/
+   or images/portraits/. Your originals are never touched.
+
+   HOW TO USE IT:
+     1. Drop your full-size photos into LensworksPortoflio/Events (for event
+        pics) or LensworksPortoflio/Photoshoots (for portraits).
+     2. Open a terminal in this "optimize" folder
+        (in File Explorer: right-click the folder → "Open in Terminal").
+     3. Run:  node optimize.mjs
+     4. The web-ready copies appear in images/events/ or images/portraits/.
+        Then add <a>/<img> tags for them in index.html (copy an existing
+        tile block and change the file paths).
+
+   Note: it re-processes every photo each run — that's fine, existing web
+   copies are just regenerated with the same names.
+   ========================================================================== */
 import sharp from 'sharp';
 import { readdir, mkdir } from 'fs/promises';
 import { existsSync, statSync } from 'fs';

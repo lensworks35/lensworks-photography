@@ -1,8 +1,32 @@
 <!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     LENSWORKS PHOTOGRAPHY — index.html
+     This ONE file contains all the words and photo lists for the site.
+
+     QUICK GUIDE FOR EDITING:
+     • All visible text lives in this file — just find the words and change them.
+     • Photos: each photo appears as an <img src="images/..."> tag. To swap a
+       photo, change the file path in BOTH the <a href="..."> (the big lightbox
+       version) and the <img src="..."> (the thumbnail) to your new image.
+       Also update the alt="..." text (describes the photo for Google/screen
+       readers) and data-title="..." (the caption shown in the lightbox).
+     • Colors & fonts live in css/styles.css (see the top of that file).
+     • Animations & the contact form live in js/main.js (rarely needs editing).
+     • After editing css/styles.css or js/main.js, bump the version number in
+       the two "?v=5" links near the bottom of <head> and bottom of <body>
+       (change v=5 to v=6, etc.) so visitors' browsers load the new version.
+     • To publish changes: see README.md in this folder for GitHub steps.
+
+     Comments like this one are invisible to visitors — they are notes for you.
+     ═══════════════════════════════════════════════════════════════════════ -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO: the "description" below is the gray text Google shows under your
+       link in search results. The <title> is the browser-tab text AND the
+       blue headline in Google. Edit both if your services/cities change. -->
   <meta name="description" content="Lensworks Photography — Professional portrait and event photographer serving Frisco, Plano, Allen, McKinney, and all of DFW. Book your session today.">
   <title>Frisco &amp; DFW Portrait + Event Photographer | Lensworks Photography</title>
 
@@ -15,7 +39,8 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="theme-color" content="#17120F">
 
-  <!-- Open Graph -->
+  <!-- Open Graph: controls the preview card (image + title) that appears when
+       someone shares the site link on Instagram, iMessage, Facebook, etc. -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lensworksphoto.com/" />
   <meta property="og:title" content="Frisco & DFW Portrait + Event Photographer | Lensworks Photography" />
@@ -29,7 +54,12 @@
   <meta name="twitter:description" content="Professional portrait and event photographer serving Frisco, Plano, Allen, McKinney, and all of DFW." />
   <meta name="twitter:image" content="https://lensworksphoto.com/images/hero.jpg" />
 
-  <!-- Local Business Schema -->
+  <!-- Local Business Schema: invisible business info that helps Google show
+       you in local search / maps results. Phone, email, and cities served
+       are listed here — keep them matching the visible site content.
+       ⚠ CAREFUL: this block is JSON, which does NOT allow comments and is
+       strict about commas/quotes. A single missing comma breaks the whole
+       block (the site still works, but Google ignores it). -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -96,21 +126,30 @@
   }
   </script>
 
-  <!-- Fonts -->
+  <!-- Fonts (loaded from Google Fonts):
+       Newsreader = the elegant serif used for big headings,
+       Space Grotesk = the clean font used for labels and body text.
+       To change fonts, pick new ones at fonts.google.com, replace this link,
+       then update the --serif and --sans values at the top of css/styles.css. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- GLightbox -->
+  <!-- GLightbox: the pop-up photo viewer that opens when a photo is clicked -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
 
+  <!-- The site's stylesheet. If you edit styles.css, bump v=5 to v=6 here
+       so browsers don't keep showing the old cached version. -->
   <link rel="stylesheet" href="css/styles.css?v=5">
 </head>
 <body>
 
+  <!-- Subtle film-grain texture layered over the whole page (see .grain in CSS) -->
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- NAV -->
+  <!-- ═══════════ NAVIGATION BAR (fixed to the top of the screen) ═══════════
+       The links scroll to sections on this page. "#work" jumps to the element
+       with id="work", "#about" to id="about", and so on. -->
   <header class="site-nav" id="site-nav">
     <a href="#top" class="brand">Lensworks</a>
     <nav class="nav-links" aria-label="Primary">
@@ -125,7 +164,10 @@
     </button>
   </header>
 
-  <!-- MOBILE MENU -->
+  <!-- ═══════════ MOBILE MENU (full-screen menu on phones) ═══════════
+       Opens when the ☰ burger button is tapped. If you rename a section in
+       the nav above, rename it here too so desktop and mobile match.
+       The style="--md:.05s" values stagger the link fade-in animation. -->
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
     <a href="#work" class="mm-link" style="--md:.05s">Selected <em>Work</em></a>
     <a href="#portfolio" class="mm-link" style="--md:.12s">The <em>Archive</em></a>
@@ -140,8 +182,15 @@
 
   <main id="top">
 
-    <!-- HERO -->
+    <!-- ═══════════ HERO (the full-screen opening section) ═══════════
+       Contains: the spinning camera-aperture graphic (decorative SVG),
+       the "Currently booking" note at the top, the big name headline,
+       and the intro sentence at the bottom. -->
     <section class="hero" aria-label="Introduction">
+
+      <!-- Decorative aperture/lens drawing. Pure decoration — safe to ignore.
+           Its size, position, and slow spin are controlled in styles.css
+           under ".hero-iris". Delete this whole <div> to remove it. -->
       <div class="hero-iris" aria-hidden="true">
         <svg viewBox="0 0 800 800" focusable="false">
           <defs>
@@ -193,6 +242,8 @@
         </svg>
       </div>
 
+      <!-- "Currently booking" notice — update the season/year here each year.
+           (&amp; prints "&", &ndash; prints "–") -->
       <div class="hero-top" data-reveal>
         <div class="hero-top-in">
           <div class="hero-booking">
@@ -202,6 +253,8 @@
         </div>
       </div>
 
+      <!-- Big headline + intro sentence. The <em> around "Gadey" makes it
+           italic; the sr-only span is hidden text that helps search engines. -->
       <div class="hero-bottom">
         <div class="hero-bottom-in">
           <div class="hero-strap">
@@ -219,7 +272,9 @@
       <div class="hero-scrollcue hide-sm" aria-hidden="true">Scroll</div>
     </section>
 
-    <!-- 01 STATEMENT -->
+    <!-- ═══════════ 01 STATEMENT (the big quote in serif type) ═══════════
+       Just one sentence — edit the words inside the <p> below. The
+       <span class="accent-i"> part renders in the copper accent color. -->
     <section class="statement" aria-label="Statement">
       <div class="statement-in">
         <div class="eyebrow" data-reveal>01 &mdash; Statement</div>
@@ -227,7 +282,15 @@
       </div>
     </section>
 
-    <!-- 02 SELECTED WORK -->
+    <!-- ═══════════ 02 SELECTED WORK (4 featured photos) ═══════════
+       Each photo is a <figure> block with:
+         • <a href="..."> = the full-size image the lightbox opens
+         • <img src="..."> = the same image shown on the page
+         • data-title      = caption shown inside the lightbox
+         • alt             = photo description for Google / screen readers
+         • <figcaption>    = the number + title printed under the photo
+       TO SWAP A PHOTO: change the file path in BOTH href and src.
+       The staggered layout (feat-1 … feat-4) is set in styles.css. -->
     <section class="featured" id="work">
       <div class="wrap">
         <div class="sec-head">
@@ -278,7 +341,12 @@
       </div>
     </section>
 
-    <!-- 03 IN MOTION — horizontal scroll -->
+    <!-- ═══════════ 03 IN MOTION (sideways-scrolling photo strip) ═══════════
+       On desktop this strip slides horizontally as the visitor scrolls down
+       (handled by js/main.js). On phones it becomes a normal swipe gallery.
+       Each photo is one <a class="hs-card ..."> block. The w-sm / w-md / w-lg
+       class sets the card's width. To add a photo, copy one whole <a> block
+       and change its two image paths. -->
     <section class="hscroll" id="events" aria-label="Events in motion">
       <div class="hs-stage">
         <div class="hs-title">
@@ -310,7 +378,13 @@
       </div>
     </section>
 
-    <!-- 04 THE ARCHIVE -->
+    <!-- ═══════════ 04 THE ARCHIVE (full portfolio, Portraits/Events tabs) ═══
+       Two galleries live here — one for Portraits, one for Events. The
+       buttons at the top switch between them (js/main.js handles the click).
+       TO ADD A PHOTO: copy any existing <a class="tile ..."> block inside the
+       right gallery, paste it at the end, and change the two image paths and
+       the alt text. New images go in images/portraits/ or images/events/
+       (see README.md for the image optimizer that resizes them for you). -->
     <section class="archive" id="portfolio">
       <div class="wrap">
         <div class="archive-head">
@@ -324,6 +398,7 @@
           </div>
         </div>
 
+        <!-- PORTRAITS gallery (shown by default) -->
         <div class="gallery" data-gallery-grid="portraits">
           <a href="images/portraits/sphotoshoot-3.jpg" class="tile frame ratio-45 glightbox" data-gallery="portraits" data-title="Portrait Session — Lensworks Photography, Frisco TX">
             <img src="images/portraits/sphotoshoot-3.jpg" alt="Individual portrait session DFW — Lensworks Photography Frisco TX" loading="lazy">
@@ -351,6 +426,7 @@
           </a>
         </div>
 
+        <!-- EVENTS gallery (hidden until the "Events" tab is clicked) -->
         <div class="gallery" data-gallery-grid="events" hidden>
           <a href="images/events/img_5263.jpg" class="tile frame ratio-32 glightbox" data-gallery="events" data-title="Event Photography — Lensworks Photography, Frisco TX">
             <img src="images/events/img_5263.jpg" alt="Couple celebrating under string lights — event photographer Frisco TX, Lensworks Photography" loading="lazy">
@@ -407,7 +483,12 @@
       </div>
     </section>
 
-    <!-- 05 ABOUT -->
+    <!-- ═══════════ 05 ABOUT (your photo + bio) ═══════════
+       The photo is images/IMG_0486.png — replace that file (same name) or
+       change the src below to use a different one. "object-position:50% 25%"
+       controls which part of the photo stays visible in the frame
+       (first number = left/right %, second = up/down %).
+       The bio paragraphs and the services list are plain text — edit freely. -->
     <section class="about" id="about">
       <div class="wrap about-grid">
         <div class="about-photo frame ratio-45" data-reveal>
@@ -429,7 +510,11 @@
       </div>
     </section>
 
-    <!-- 06 INSTAGRAM -->
+    <!-- ═══════════ 06 INSTAGRAM (4 square teaser photos) ═══════════
+       These are NOT pulled from Instagram automatically — they're 4 photos
+       you pick from the images/ folder, and every tile just links to your
+       Instagram profile. Swap the <img src="..."> paths whenever you want
+       to freshen this row up. -->
     <section class="insta" aria-label="Instagram">
       <div class="wrap">
         <div class="sec-head">
@@ -458,7 +543,13 @@
 
   </main>
 
-  <!-- 07 CONTACT -->
+  <!-- ═══════════ 07 CONTACT (email, phone, inquiry form, footer) ═══════════
+       Phone number appears in several places — search this file for
+       "2149406876" to find them all if it ever changes. Same for the email:
+       search "akshay@lensworksphoto.com".
+       The form sends submissions through Formspree (formspree.io) — the
+       action="https://formspree.io/f/mkoygvpg" URL is your form's address.
+       Log in at formspree.io to see submissions or change where they go. -->
   <footer class="contact" id="contact">
     <div class="wrap">
       <div class="eyebrow" data-reveal>07 &mdash; Contact</div>
@@ -522,7 +613,9 @@
     </div>
   </footer>
 
-  <!-- GLightbox JS -->
+  <!-- Scripts: GLightbox (photo pop-up viewer) + the site's own main.js.
+       If you edit js/main.js, bump v=5 to v=6 here (and keep it matching the
+       styles.css version link in <head> if you bumped that too). -->
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
   <script src="js/main.js?v=5"></script>
 </body>

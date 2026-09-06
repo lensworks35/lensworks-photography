@@ -1,30 +1,49 @@
 /* ==========================================================================
    LENSWORKS PHOTOGRAPHY — Nocturne
    Dark editorial theme. Newsreader (display serif) + Space Grotesk (labels).
+
+   HOW THIS FILE WORKS (a quick guide for editing):
+   • The ":root" block right below defines every color and font ONCE as a
+     "variable" (the names starting with --). The rest of the file refers to
+     them as var(--accent), var(--ink), etc. So to re-theme the whole site,
+     you usually only need to change the hex codes in that one block.
+   • Sizes written as clamp(A, B, C) mean: "never smaller than A, never
+     bigger than C, and B (based on screen width) in between." That's how
+     the site scales smoothly between phone and desktop.
+   • Sections below are labeled with the same names as the sections in
+     index.html (Hero, Statement, Featured, Archive, About, Contact...).
+   • Phone-specific overrides live at the bottom in the
+     "@media (max-width: ...)" blocks — those rules apply ONLY on small
+     screens and win over the rules above them.
+   • Remember: after saving changes here, bump "?v=5" on the stylesheet link
+     in index.html so browsers pick up the new file.
    ========================================================================== */
 
-/* ---------- Tokens ---------- */
+/* ---------- Tokens: the site's palette & fonts (change things here!) ------ */
 :root {
-  --bg:        #17120F;
-  --bg-2:      #1F1813;
-  --surface:   #2A211A;
-  --ink:       #ECE1D0;
-  --ink-2:     #C3B29C;
-  --warm:      #D9C3A4;
-  --muted:     #A2917D;
-  --faint:     #7E6E5C;
-  --accent:    #C98A4B;
-  --line:      rgba(236, 225, 208, .16);
-  --line-soft: rgba(236, 225, 208, .12);
-  --line-hard: rgba(236, 225, 208, .24);
+  --bg:        #17120F;   /* main page background (near-black warm brown)   */
+  --bg-2:      #1F1813;   /* slightly lighter bg (the In Motion strip)      */
+  --surface:   #2A211A;   /* card/photo placeholder background              */
+  --ink:       #ECE1D0;   /* main text color (warm off-white)               */
+  --ink-2:     #C3B29C;   /* softer text (paragraphs, descriptions)         */
+  --warm:      #D9C3A4;   /* warm highlight text ("Currently booking" line) */
+  --muted:     #A2917D;   /* small uppercase labels / eyebrows              */
+  --faint:     #7E6E5C;   /* faintest text (footer, placeholders)           */
+  --accent:    #C98A4B;   /* THE copper/amber brand color — buttons, links,
+                             italic highlights. Change this to re-accent
+                             the entire site at once.                       */
+  --line:      rgba(236, 225, 208, .16);  /* standard divider lines         */
+  --line-soft: rgba(236, 225, 208, .12);  /* fainter divider lines          */
+  --line-hard: rgba(236, 225, 208, .24);  /* stronger lines (borders/buttons)*/
 
-  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --sans:  'Space Grotesk', system-ui, -apple-system, sans-serif;
+  /* Fonts — if you swap the Google Fonts link in index.html, update these  */
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;      /* headings */
+  --sans:  'Space Grotesk', system-ui, -apple-system, sans-serif; /* body/labels */
 
-  --pad:  clamp(22px, 5vw, 68px);
-  --max:  1360px;
-  --ease: cubic-bezier(.16, .84, .3, 1);
-  --shadow: 0 40px 80px -50px rgba(0, 0, 0, .9);
+  --pad:  clamp(22px, 5vw, 68px);  /* left/right page padding               */
+  --max:  1360px;                  /* max content width on huge screens     */
+  --ease: cubic-bezier(.16, .84, .3, 1);       /* animation easing curve    */
+  --shadow: 0 40px 80px -50px rgba(0, 0, 0, .9); /* photo drop shadow       */
 }
 
 /* ---------- Reset / base ---------- */
@@ -219,7 +238,9 @@ button {
   color: var(--muted);
 }
 
-/* ---------- Grain ---------- */
+/* ---------- Grain: the film-grain texture over the whole page ----------
+   "opacity: .06" is its strength — raise for grainier, lower for cleaner,
+   or delete the <div class="grain"> in index.html to remove entirely. */
 .grain {
   position: fixed;
   inset: 0;
@@ -358,7 +379,8 @@ button {
 }
 .mobile-menu.is-open .mm-foot { opacity: 1; }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero: the full-screen opening section ----------
+   The h1 font-size clamp() further down controls how huge the name is. */
 .hero {
   position: relative;
   height: 100vh;
@@ -368,7 +390,10 @@ button {
   background: radial-gradient(1100px 820px at 70% 42%, #211A14 0%, var(--bg) 62%);
 }
 
-/* Aperture iris */
+/* Aperture iris — the spinning lens drawing in the hero.
+   top/right position it, width sizes it. The spin speeds are the
+   "170s"/"240s" values in .iris-spin-cw / .iris-spin-ccw below
+   (bigger number = slower spin). */
 .hero-iris {
   position: absolute;
   top: 46%;
@@ -532,7 +557,10 @@ button {
   text-wrap: pretty;
 }
 
-/* ---------- Featured / Selected work ---------- */
+/* ---------- Featured / Selected work (section 02) ----------
+   The 4 photos sit on an invisible 12-column grid. feat-1…feat-4 below
+   choose which columns each photo spans ("1 / 6" = columns 1 through 5)
+   and margin-top pushes some photos down for the staggered look. */
 .featured { padding: 0 var(--pad) clamp(60px, 9vw, 120px); }
 .featured .sec-head { margin-bottom: clamp(44px, 7vw, 90px); }
 
@@ -577,7 +605,9 @@ button {
   font-size: 21px;
 }
 
-/* ---------- Horizontal scroll — events in motion ---------- */
+/* ---------- Horizontal scroll — events in motion (section 03) ----------
+   "height: 340vh" = how long the visitor scrolls down while the strip
+   slides sideways (bigger = slower/longer ride). js/main.js does the math. */
 .hscroll { position: relative; height: 340vh; }
 .hs-stage {
   position: sticky;
@@ -678,7 +708,9 @@ button {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop — change the
+                                            3 for more/fewer (phone versions
+                                            are set in @media blocks below) */
   gap: clamp(14px, 2.4vw, 30px);
 }
 .gallery[hidden] { display: none; }
@@ -931,7 +963,10 @@ html.js [data-reveal].is-in {
 .glightbox-clean .gprev,
 .glightbox-clean .gclose { background: transparent; }
 
-/* ---------- Responsive ---------- */
+/* ---------- Responsive: rules that ONLY apply on smaller screens ----------
+   Anything inside "@media (max-width: 860px)" kicks in on phones/small
+   tablets and overrides the desktop rules above. Edit here to change how
+   the site looks on mobile without touching desktop. */
 @media (max-width: 1023px) {
   .contact-grid { grid-template-columns: 1fr; }
 }
@@ -993,7 +1028,9 @@ html.js [data-reveal].is-in {
   .sec-head { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
 
-/* ---------- Reduced motion ---------- */
+/* ---------- Reduced motion: accessibility — leave this block alone ----------
+   Visitors who turn on "reduce motion" in their device settings get a
+   still version of the site (no spins, slides, or fade-ins). */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
